@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+</head>
+<body>
+    {%if form.errors %}
+    <p> Invalid username/password combination, please try again </p>
+    {% endif %}
+
+    <h1>Welcome to Tuiter!</h1>
+    <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+        {{form.username.label_tag}}{{form.username}}<br>
+        {{form.password.label_tag}}{{form.password}}<br>
+        <input type="submit" value="Sign in" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <br>
+    <a href="{% url 'register' %}" id="new">I am a new user</a>
+    <a href="{% url 'index' %}">Back to main page</a>
+</body>
+</html>

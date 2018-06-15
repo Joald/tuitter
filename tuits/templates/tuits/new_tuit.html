@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a new tuit</title>
+</head>
+<body>
+<h2>Enter tuit message</h2>
+<form action="{% url 'new_tuit' %}/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+<a href="{% url 'index' %}">Back to main page</a>
+</body>
+</html>

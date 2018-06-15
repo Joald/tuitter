@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}</title>
+</head>
+<body>
+{% if user.is_authenticated and user.username == logged_username %}
+    <h1>This is what you have tuitted recently:</h1>
+    <p><a href="{% url 'new_tuit' %}">Add a new Tuit!</a> </p>
+    <p><a href="{% url 'user_page' username=user.username%}">Friend list</a></p>
+
+
+{% endif %}
+{% if tuit_list %}
+    <h2>Latest {{ tuit_number }} tuits</h2>
+    <ul>
+    {% for tuit in tuit_list %}
+        <li><a href="{% url 'detail' tuit.id %}">{{ tuit.tuit_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tuits are available.</p>
+{% endif %}
+<a href="{% url 'index' %}">Back to main page</a>
+</body>
+</html>

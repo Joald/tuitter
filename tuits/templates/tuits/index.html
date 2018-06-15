@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Welcome to Tuiter</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <h1>Hello, {{ user.username }}!</h1>
+    <p><a href="{% url 'new_tuit' %}">Add a new Tuit!</a> </p>
+    <p><a href="{% url 'user_page' username=user.username%}">Your profile</a></p>
+
+
+    <p><a href="{% url 'logout' %}">Log out</a> </p>
+{% else %}
+    <h1>Hello, random Internet person</h1>
+    <p><a href="{% url 'login' %}">Log in</a> </p>
+{% endif %}
+
+{% if latest_tuit_list %}
+    <h2>Latest {{ tuit_number }} tuits</h2>
+    <ul>
+    {% for tuit in latest_tuit_list %}
+        <li><a href="{% url 'detail' tuit.id %}">{{ tuit.tuit_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tuits are available.</p>
+{% endif %}
+
+</body>
+
+</html>
