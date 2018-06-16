@@ -9,5 +9,7 @@ class Tuit(models.Model):
     def __str__(self):
         return self.tuit_text.encode('utf-8').strip()
 
+
 class Friendship(models.Model):
-    friender
+    friend1 = models.CharField(max_length=30)
+    friend2 = models.CharField(max_length=30)

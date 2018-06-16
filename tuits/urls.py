@@ -5,9 +5,12 @@ from . import views
 # Letters, digits and @/./+/-/_
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^friends_tuits$', views.friends_tuits, name='friends_tuits'),
     url(r'^(?P<tuit_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^users/(?P<username>(\w|@|\.|\+|-|_)+)/$', views.user_page, name='user_page'),
-    url(r'^users/(?P<username>(\w|@|\.|\+|-|_)+)/friends/$', views.friends, name='user_page'),
+    url(r'^users/(?P<username>(\w|@|\.|\+|-|_)+)/friends/$', views.friends, name='friend_list'),
+    url(r'^users/(?P<username>(\w|@|\.|\+|-|_)+)/befriend/$', views.befriend, name='befriend'),
+    url(r'^users/(?P<username>(\w|@|\.|\+|-|_)+)/unfriend/$', views.unfriend, name='unfriend'),
     url(r'^login/$', views_auth.LoginView.as_view(template_name='registration/login.html'), name='login'),
     url(r'^logout/$', views_auth.LogoutView.as_view(next_page='index'), name='logout'),
     url(r'^register/$', views.register, name='register'),

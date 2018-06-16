@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>{{ tuit }}</h2>
-  <p>tuitted by <a href="{% url 'user_page' tuit.creator %}">{{ tuit.creator }}</a> on {{ tuit.pub_date }}</p>
+  <p>tuitted by <a href="{% url 'user_page' username=tuit.creator %}">{{ tuit.creator }}</a> on {{ tuit.pub_date }}</p>
 <a href="{% url 'index' %}">Back to main page</a>
 </body>
 </html>

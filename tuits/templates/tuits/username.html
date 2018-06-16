@@ -2,18 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ user.username }}</title>
+    <title>{{ target_user.username }}</title>
 </head>
 <body>
-{% if user.is_authenticated and user.username == logged_username %}
+{% if current_user and target_user.username == current_user.username %}
     <h1>This is what you have tuitted recently:</h1>
     <p><a href="{% url 'new_tuit' %}">Add a new Tuit!</a> </p>
-    <p><a href="{% url 'user_page' username=user.username%}">Friend list</a></p>
-
-
+    <p><a href="{% url 'friend_list' username=target_user.username%}">Friend list</a></p>
+{% else %}
+    <h1>This is what {{ target_user.username }} has tuitted recently:</h1>
+    {% if can_add_friend %}
+        <p><a href="{% url 'befriend' username=target_user.username%}">Add as friend</a></p>
+    {% elif current_user %}
+        <p>{{ target_user.username }} is your friend!</p>
+        <p><a href="{% url 'unfriend' username=target_user.username%}">You can change that!</a></p>
+    {% endif %}
+    <p><a href="{% url 'friend_list' username=target_user.username%}">{{ target_user.username }}'s friend list</a></p>
 {% endif %}
+<p>{{ extra }}</p>
 {% if tuit_list %}
-    <h2>Latest {{ tuit_number }} tuits</h2>
+    <h2>{{ target_user.username }}'s tuits</h2>
     <ul>
     {% for tuit in tuit_list %}
         <li><a href="{% url 'detail' tuit.id %}">{{ tuit.tuit_text }}</a></li>

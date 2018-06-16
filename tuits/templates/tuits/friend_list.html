@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ target_user.username }}</title>
+</head>
+<body>
+{% if current_user and current_user.username == target_user.username %}
+    <h1>Your friend list:</h1>
+    <p><a href="{% url 'new_tuit' %}">Add a new Tuit!</a> </p>
+{% else %}
+    <h1>List of <a href="{% url 'user_page' username=target_user.username %}">{{ target_user.username }}</a>'s friends:</h1>
+{% endif %}
+{% if friend_list %}
+    <ul>
+    {% for friend in friend_list %}
+        <li><a href="{% url 'user_page' username=friend %}">{{ friend }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    {% if current_user and current_user.username == target_user.username %}
+        <h1>You are forever alone</h1>
+    {% else %}
+        <h1>{{ target_user.username }} is forever alone</h1>
+    {% endif %}
+{% endif %}
+<a href="{% url 'index' %}">Back to main page</a>
+</body>
+</html>
