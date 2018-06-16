@@ -106,7 +106,6 @@ def user_page(request, username, extra=''):
     context['can_add_friend'] = request.user.is_authenticated and not \
         _get_friendship(min(username, context['current_user'].username),
                         max(username, context['current_user'].username)).exists()
-    print(context)
     return render(request, 'tuits/username.html', context)
 
 

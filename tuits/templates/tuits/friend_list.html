@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ target_user.username }}</title>
+    <title>{{ target_user.username }}'s friends</title>
 </head>
 <body>
 {% if current_user and current_user.username == target_user.username %}
-    <h1>Your friend list:</h1>
+    <h1><a href="{% url 'user_page' username=target_user.username %}">Your</a> friend list:</h1>
     <p><a href="{% url 'new_tuit' %}">Add a new Tuit!</a> </p>
 {% else %}
     <h1>List of <a href="{% url 'user_page' username=target_user.username %}">{{ target_user.username }}</a>'s friends:</h1>
